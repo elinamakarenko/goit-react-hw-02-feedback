@@ -1,16 +1,44 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import { Component } from 'react';
+import Feedback from './Feedback';
+
+class App extends Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+
+  incrementFeedback = value => {
+    console.log(value);
+      switch (value) {
+        case 'good':
+          this.setState(prevState => ({
+            good: prevState.good + 1,
+          }));
+          break;
+        case 'neutral':
+          this.setState(prevState => ({
+            neutral: prevState.neutral + 1,
+          }));
+          break;
+        case 'bad':
+          this.setState(prevState => ({
+            bad: prevState.bad + 1,
+          }));
+          break;
+        default:
+          break;
+    }
+  };
+
+  render() {
+    const feedback = this.state;
+    return (
+      <div>
+        <Feedback feedback={feedback} addFeedback={this.incrementFeedback} />
+      </div>
+    );
+  }
+}
+
+export default App;
